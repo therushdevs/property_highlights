@@ -89,7 +89,7 @@ const PropertyHighlights: React.FC = () => {
   };
   const deleteHighlight = async ({ id }: { id: string }) => {
     try {
-      const response = await axiosInstance.delete(`/property_highlights/${id}`);
+      await axiosInstance.delete(`/property_highlights/${id}`);
       await fetchHighlights();
       toast.success("Property highlight deleted successfully");
     } catch (error) {

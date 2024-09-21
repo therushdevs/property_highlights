@@ -1,5 +1,3 @@
-// pages/index.tsx
-import DragDrop from "@/components/DragDrop";
 import PropertyHighlights from "../components/PropertyHighlights";
 
 const Home = () => {
