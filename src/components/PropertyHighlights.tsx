@@ -70,6 +70,7 @@ const PropertyHighlights: React.FC = () => {
       setHighlights(response.data);
     } catch (error) {
       toast.error("Error fetching property highlights");
+      console.error(error);
     }
   };
 
@@ -83,6 +84,7 @@ const PropertyHighlights: React.FC = () => {
       toast.success("Property highlight added successfully");
     } catch (error) {
       toast.error("Error adding property highlight");
+      console.error(error);
     }
   };
   const deleteHighlight = async ({ id }: { id: string }) => {
@@ -92,6 +94,7 @@ const PropertyHighlights: React.FC = () => {
       toast.success("Property highlight deleted successfully");
     } catch (error) {
       toast.error("Error deleting property highlight");
+      console.error(error);
     }
   };
 
