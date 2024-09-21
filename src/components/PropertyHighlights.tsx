@@ -35,7 +35,7 @@ const HighlightItem: React.FC<{
     drop(item: { index: number }) {
       if (item.index !== index) {
         moveHighlight(item.index, index);
-        item.index = index; // Update the index for the dragged item
+        item.index = index;
       }
     },
   });
@@ -63,7 +63,6 @@ const HighlightItem: React.FC<{
 const PropertyHighlights: React.FC = () => {
   const [highlights, setHighlights] = useState<PropertyHighlight[]>([]);
   const [title, setTitle] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchHighlights = async () => {
     try {
@@ -90,9 +89,9 @@ const PropertyHighlights: React.FC = () => {
     try {
       const response = await axiosInstance.delete(`/property_highlights/${id}`);
       await fetchHighlights();
-      toast.success("Property highlight added successfully");
+      toast.success("Property highlight deleted successfully");
     } catch (error) {
-      toast.error("Error adding property highlight");
+      toast.error("Error deleting property highlight");
     }
   };
 
@@ -102,7 +101,6 @@ const PropertyHighlights: React.FC = () => {
     updatedHighlights.splice(hoverIndex, 0, removed);
     setHighlights(updatedHighlights);
 
-    // Create an array of reordered IDs
     const reorderedIds = updatedHighlights.map((highlight) => highlight._id);
     console.log(
       `data: ${JSON.stringify(updatedHighlights)} ${JSON.stringify(
@@ -111,7 +109,6 @@ const PropertyHighlights: React.FC = () => {
     );
 
     try {
-      // Send reordered IDs to the backend
       const response = await axiosInstance.put("/property_highlights/reorder", {
         reorderedIds,
       });
@@ -124,8 +121,7 @@ const PropertyHighlights: React.FC = () => {
     } catch (error) {
       toast.error("Error updating order in the database");
       console.error(error);
-      // Revert to original state if API call fails
-      fetchHighlights(); // Fetch original state on error
+      fetchHighlights();
     }
   };
 
@@ -136,7 +132,6 @@ const PropertyHighlights: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="container mx-auto p-4">
-        {isLoading && <div className="loading-indicator">Loading...</div>}
         <h1 className="text-2xl font-bold mb-4">Property Highlights</h1>
         <input
           type="text"
