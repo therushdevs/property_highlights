@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+The backend is hosted on Render & running on the free tier, so could be slower than usual.
+
+Hosted URL: https://property-highlights-beta.vercel.app/ 
+
+Repo link working as backend for the application: https://github.com/therushdevs/property_highlights_server
+
+Loom Video: https://www.loom.com/share/7ab39d5029db44098d63539163722a24 
+
 ## Getting Started
 
 First, run the development server:
