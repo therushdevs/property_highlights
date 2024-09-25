@@ -63,6 +63,7 @@ const HighlightItem: React.FC<{
 const PropertyHighlights: React.FC = () => {
   const [highlights, setHighlights] = useState<PropertyHighlight[]>([]);
   const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchHighlights = async () => {
     try {
@@ -71,11 +72,14 @@ const PropertyHighlights: React.FC = () => {
     } catch (error) {
       toast.error("Error fetching property highlights");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const addHighlight = async () => {
     try {
+      setIsLoading(true);
       const response = await axiosInstance.post("/property_highlights", {
         title,
       });
@@ -85,16 +89,21 @@ const PropertyHighlights: React.FC = () => {
     } catch (error) {
       toast.error("Error adding property highlight");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const deleteHighlight = async ({ id }: { id: string }) => {
     try {
+      setIsLoading(true);
       await axiosInstance.delete(`/property_highlights/${id}`);
       await fetchHighlights();
       toast.success("Property highlight deleted successfully");
     } catch (error) {
       toast.error("Error deleting property highlight");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -150,17 +159,23 @@ const PropertyHighlights: React.FC = () => {
           Add Highlight
         </button>
 
-        <div className="mt-4">
-          {highlights.map((highlight, index) => (
-            <HighlightItem
-              key={highlight._id}
-              index={index}
-              highlight={highlight}
-              moveHighlight={moveHighlight}
-              deleteHighlight={deleteHighlight}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center py-[200px] ">
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <div className="mt-4">
+            {highlights.map((highlight, index) => (
+              <HighlightItem
+                key={highlight._id}
+                index={index}
+                highlight={highlight}
+                moveHighlight={moveHighlight}
+                deleteHighlight={deleteHighlight}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </DndProvider>
   );
