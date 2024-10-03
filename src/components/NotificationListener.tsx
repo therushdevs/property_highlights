@@ -20,7 +20,7 @@ const NotificationListener = () => {
     console.log("connection successful");
 
     eventSource.onopen = (event) => {
-      toast.success("connection success");
+      toast.success("connection success" + event.timeStamp.toString());
     };
 
     eventSource.onmessage = (event) => {
