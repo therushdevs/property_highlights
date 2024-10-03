@@ -13,9 +13,7 @@ const NotificationListener = () => {
       "0e6e6ab348a018bed21c70c8aad9d61945121e8dd6cdb57a817ec42ed7911bcb";
 
     // Connect to the SSE endpoint
-    const eventSource = new EventSource(
-      `https://4d1f-2405-201-1007-fa8d-de8a-300e-f144-94a0.ngrok-free.app/api/notifications?api_key=${apiKey}`
-    );
+    const eventSource = new EventSource(`/api/notifications?api_key=${apiKey}`);
     toast.success(`connection successful ${eventSource.OPEN.toString()}`);
     console.log("connection successful");
 
