@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const NotificationListener = () => {
-  const [messages, setMessages] = useState<string[]>([]);
+  //   const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
     console.log("connecting notification");
@@ -27,7 +27,7 @@ const NotificationListener = () => {
       console.log("Inside onMessage method");
       const data = JSON.parse(event.data);
       console.log(`Data success: ${data}`);
-      setMessages(event.data);
+      //   setMessages(event.data);
       toast.success(`Success ${event.data}`);
     };
 
